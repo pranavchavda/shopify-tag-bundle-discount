@@ -1,0 +1,11 @@
+fly.toml
+
+/node_modules
+*.log
+.DS_Store
+.env
+/.cache
+/public/build
+/build
+/prisma/dev.sqlite
+/prisma/dev.sqlite-journal

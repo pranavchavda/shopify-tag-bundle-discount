@@ -1,0 +1,26 @@
+name: Deploy to Fly.io
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      
+      - name: Deploy to Fly.io
+        run: |
+          flyctl deploy --remote-only \
+            --env SHOPIFY_API_KEY="${{ secrets.SHOPIFY_API_KEY }}" \
+            --env SHOPIFY_API_SECRET="${{ secrets.SHOPIFY_API_SECRET }}" \
+            --env SCOPES="${{ secrets.SCOPES }}" \
+            --env SHOPIFY_APP_URL="${{ secrets.SHOPIFY_APP_URL }}"

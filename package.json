@@ -13,7 +13,10 @@
     "env:pull": "shopify app env pull",
     "env:show": "shopify app env show",
     "app:function:build": "npm run build -w extensions/product-discount",
-    "app:function:schema": "npm run schema -w extensions/product-discount"
+    "app:function:schema": "npm run schema -w extensions/product-discount",
+    "start": "remix-serve ./build/server/index.js",
+    "build:remix": "remix build",
+    "prisma:migrate": "prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
