@@ -1,0 +1,36 @@
+api_version = "2024-01"
+
+[[extensions]]
+name = "product-discount"
+type = "product_discount"
+handle = "product-discount"
+
+[[extensions.targeting]]
+target = "purchase.product-discount.run"
+input_query = """
+  query Input($cart: Cart!) {
+    cart: cart {
+      lines {
+        id
+        quantity
+        merchandise {
+          __typename
+          ... on ProductVariant {
+            id
+            product {
+              id
+              title
+              tags
+            }
+          }
+        }
+      }
+    }
+    discountNode {
+      metafield(namespace: "product-discount", key: "config") {
+        value
+      }
+    }
+  }
+"""
+export = "run"

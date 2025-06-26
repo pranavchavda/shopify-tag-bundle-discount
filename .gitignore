@@ -1,0 +1,12 @@
+node_modules
+.env
+.cache
+build
+public/build
+prisma/dev.sqlite
+prisma/dev.sqlite-journal
+.DS_Store
+*.log
+dist
+extensions/*/dist
+extensions/*/node_modules

@@ -1,0 +1,13 @@
+{
+  "name": "product-discount",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@shopify/function-runner": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "shopify app function build",
+    "schema": "shopify app function typegen"
+  }
+}

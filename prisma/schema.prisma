@@ -1,0 +1,42 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+model DiscountConfiguration {
+  id              String   @id @default(cuid())
+  shop            String
+  functionId      String
+  tagName         String
+  discountType    String   // "percentage" or "fixed_amount"
+  discountValue   Float
+  selectedProducts String  // JSON array of product IDs
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([shop])
+  @@index([functionId])
+}

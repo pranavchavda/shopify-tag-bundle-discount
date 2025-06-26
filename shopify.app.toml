@@ -1,0 +1,39 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "YOUR_CLIENT_ID"
+name = "Tag-based Product Discount"
+handle = "tag-based-product-discount"
+application_url = "https://your-app-url.com"
+embedded = true
+
+[build]
+dev_store_url = "your-store.myshopify.com"
+
+[access_scopes]
+scopes = "write_products,read_products,write_discounts,read_discounts"
+
+[auth]
+redirect_urls = [
+  "https://your-app-url.com/auth/callback",
+  "https://your-app-url.com/auth/shopify/callback",
+  "https://your-app-url.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-01"
+
+[pos]
+embedded = false
+
+[[extensions]]
+type = "function"
+name = "Product discount with tag"
+handle = "product-discount"
+
+[extensions.build]
+command = "cd extensions/product-discount && npm run build"
+
+[extensions.targeting]
+target = "purchase.product-discount.run"
+input_query = "query Input($cart: Cart!) { cart: cart }"
+export = "run"
