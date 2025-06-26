@@ -1,5 +1,5 @@
 # base node image
-FROM node:18-bullseye-slim as base
+FROM node:20-bullseye-slim as base
 
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
@@ -35,7 +35,8 @@ ADD prisma .
 RUN npx prisma generate
 
 ADD . .
-RUN npm run build:remix
+# Use npx remix build directly to avoid Shopify CLI wrapper
+RUN npx remix build
 
 # Finally, build the production image with minimal footprint
 FROM base

@@ -7,4 +7,19 @@ export default defineConfig({
     remix(),
     tsconfigPaths(),
   ],
+  build: {
+    target: "esnext",
+  },
+  optimizeDeps: {
+    include: ["@shopify/shopify-app-remix", "@shopify/polaris"],
+    esbuildOptions: {
+      target: "esnext",
+    },
+  },
+  esbuild: {
+    target: "esnext",
+    supported: {
+      'import-assertions': true,
+    },
+  },
 });
